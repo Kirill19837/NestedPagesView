@@ -1,18 +1,16 @@
 angular.module('umbraco').controller('NestedContentWrapper', NestedContentWrapper);
 
-function NestedContentWrapper($scope, $routeParams, editorState, sectionContainerResource) {
+function NestedContentWrapper($scope, $routeParams, editorState, nestedPagesViewResource) {
     $scope.inited = false;
-    $scope.viewmodel = {
-        config: {}
-    };
+
     $scope.options = {
         allowedContainer: $scope.model.config.allowedContainer
     }
 
     function loadAllowedTypes(id) {
-        return sectionContainerResource.getAllowedSections(id, $scope.options.allowedContainer)
+        return nestedPagesViewResource.getAllowedSections(id, $scope.options.allowedContainer)
             .then(function (data) {
-                $scope.viewmodel.config.contentTypes = data.data.map(x => ({
+                $scope.model.config.contentTypes = data.data.map(x => ({
                     ncAlias: x.alias,
                     ncTabAlias: "Content",
                     nameTemplate: "{{name}} "
@@ -21,10 +19,10 @@ function NestedContentWrapper($scope, $routeParams, editorState, sectionContaine
     }
 
     function loadPagesData(id) {
-        return sectionContainerResource.getAllSections(id, $scope.options.allowedContainer,  $scope.model.culture)
+        return nestedPagesViewResource.getAllSections(id, $scope.options.allowedContainer,  $scope.model.culture)
             .then(function (data) {
 
-                $scope.viewmodel.value = data.data.items.map(x => {
+                $scope.model.data = data.data.items.map(x => {
 
                     var mapped = {
                         key: x.id,
@@ -40,14 +38,14 @@ function NestedContentWrapper($scope, $routeParams, editorState, sectionContaine
                     return mapped;
                 });
 
-                $scope.viewmodel.originalValue = angular.copy($scope.viewmodel.value);
+                $scope.model.originalValue = angular.copy($scope.model.data);
             });
     }
 
     function loadParentId(id){
-        return sectionContainerResource.getContainerId(id, $scope.options.allowedContainer)
+        return nestedPagesViewResource.getContainerId(id, $scope.options.allowedContainer)
         .then(function (data){
-            $scope.viewmodel.config.parentId = data.data;
+            $scope.model.config.parentId = data.data;
         });
     }
 
@@ -57,14 +55,14 @@ function NestedContentWrapper($scope, $routeParams, editorState, sectionContaine
             return;
         }
 
-        $scope.viewmodel.config.confirmDeletes = true;
-        $scope.viewmodel.config.showIcons = true;
-        $scope.viewmodel.config.culture = $scope.model.culture;
+        $scope.model.config.confirmDeletes = true;
+        $scope.model.config.showIcons = true;
+        $scope.model.config.culture = $scope.model.culture;
 
         $scope.contentId = editorState.current ? editorState.current.id : id;
-        sectionContainerResource.getContainerId($scope.contentId, $scope.options.allowedContainer).then(data => {
+        nestedPagesViewResource.getContainerId($scope.contentId, $scope.options.allowedContainer).then(data => {
             $scope.containerId = data.data;
-            $scope.viewmodel.id = data.data;
+            $scope.model.id = data.data;
         });
 
         $scope.isTrashed = editorState.current ? editorState.current.trashed : id === "-20" || id === "-21";
@@ -82,5 +80,4 @@ function NestedContentWrapper($scope, $routeParams, editorState, sectionContaine
     }
 
     initView();
-    $scope.model.value = 0;
 }

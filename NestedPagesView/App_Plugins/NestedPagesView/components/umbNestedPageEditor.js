@@ -4,7 +4,9 @@ angular.module('umbraco.directives').directive('umbNestedPageEditor', [function 
         $scope.model = angular.copy($scope.ngModel);
         $scope.nodeContext = $scope.model;
 
-        $scope.defaultVariant = $scope.model.variants.find(x => x.language.isDefault);
+        $scope.defaultVariant = $scope.model.variants.length > 1
+            ? $scope.model.variants.find(x => x.language.isDefault)
+            : $scope.model.variants[0];
 
         var selectedTab = $scope.model.currentVariant.tabs[0];
         if ($scope.tabAlias) {

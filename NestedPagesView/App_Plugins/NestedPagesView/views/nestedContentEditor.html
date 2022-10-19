@@ -4,7 +4,7 @@
     <ng-form name="nestedContentForm" ng-show="vm.inited">
         <div class="umb-nested-content__items" ng-hide="vm.nodes.length === 0" ng-model="vm.nodes">
             <div class="umb-nested-content__item" ng-repeat="node in vm.nodes"
-                ng-class="{ 'umb-nested-content__item--active' : vm.containsNode(node), 'umb-nested-content__item--single' : vm.singleMode }">
+                ng-class="{ 'umb-nested-content__item--active' :vm.containsNode(node), 'umb-nested-content__item--single' : vm.singleMode }">
                 <div class="umb-nested-content__header-bar" ng-click="vm.setCurrentNode(node)" ng-hide="vm.singleMode"
                     umb-auto-focus="{{vm.containsNode(node) ? 'true' : 'false'}}">
                     <div class="umb-nested-content__heading" ng-class="{'not-published': !node.published}">
@@ -12,7 +12,7 @@
                         <span class="umb-nested-content__item-name" ng-class="{'--has-icon': vm.showIcons}"
                             ng-bind="vm.getName($index)"></span>
                     </div>
-                    <div class="umb-nested-content__icons">
+                    <div class="umb-nested-content__icons" ng-class="{'not-published': !node.published}">
                         <button type="button" class="umb-nested-content__icon umb-nested-content__icon--delete umb-nested-content__icon--publish"
                             ng-if="!node.published" localize="title" title="nestedPagesView_publish"
                             ng-click="vm.publish(node); $event.stopPropagation();">
@@ -30,6 +30,21 @@
                                 <localize key="nestedPagesView_unpublish">Unpublish</localize>
                             </span>
                         </button>
+                        <button type="button" class="umb-nested-content__icon umb-nested-content__icon--copy"
+                            title="{{vm.labels.copy_icon_title}}" ng-click="vm.clickCopy($event, node);"
+                            ng-if="vm.showCopy">
+                            <i class="icon icon-documents" aria-hidden="true"></i>
+                            <span class="sr-only">{{vm.labels.copy_icon_title}}</span>
+                        </button>
+                        <button type="button" class="umb-nested-content__icon umb-nested-content__icon--delete"
+                            localize="title" title="general_delete"
+                            ng-class="{ 'umb-nested-content__icon--disabled': !vm.canDeleteNode($index) }"
+                            ng-click="vm.requestDeleteNode($index); $event.stopPropagation();"> <i
+                                class="icon icon-trash" aria-hidden="true"></i>
+                            <span class="sr-only">
+                                <localize key="general_delete">Delete</localize>
+                            </span>
+                        </button>
                     </div>
                 </div>
                 <div class="umb-nested-content__content" ng-if="vm.containsNode(node)">
@@ -38,5 +53,35 @@
                 </div>
             </div>
         </div>
+        <div ng-hide="vm.hasContentTypes">
+            <div class="umb-nested-content__help-text">
+                <localize key="content_nestedContentNoContentTypes"></localize>
+            </div>
+        </div>
+        <div class="umb-nested-content__footer-bar"
+            ng-hide="!vm.inited || vm.hasContentTypes === false || vm.singleMode === true"> <button type="button"
+                class="btn-reset umb-nested-content__add-content umb-focus"
+                ng-class="{ '--disabled': (!vm.scaffolds.length || vm.nodes.length >= vm.maxItems) }"
+                ng-click="vm.openNodeTypePicker($event)" prevent-default>
+                <localize key="grid_addElement"></localize>
+            </button>
+        </div>
+        <input type="hidden" name="minCount" ng-model="vm.nodes">
+        <input type="hidden" name="maxCount" ng-model="vm.nodes">
+        <div ng-messages="nestedContentForm.minCount.$error" show-validation-on-submit>
+            <div class="help text-error" ng-message="minCount">
+                <localize key="validation_entriesShort" tokens="[vm.minItems, vm.minItems - vm.nodes.length]"
+                    watch-tokens="true">Minimum %0% entries, needs <strong>%1%</strong> more.</localize>
+            </div>
+        </div>
+        <div ng-if="nestedContentForm.minCount.$error === true || vm.nodes.length > vm.maxItems">
+            <div class="help text-error">
+                <localize key="validation_entriesExceed" tokens="[vm.maxItems, vm.nodes.length - vm.maxItems]"
+                    watch-tokens="true">Maximum %0% entries, <strong>%1%</strong> too many.</localize>
+            </div>
+        </div>
     </ng-form>
+    <umb-overlay ng-if="vm.overlayMenu.show" position="target" size="vm.overlayMenu.size" view="vm.overlayMenu.view"
+        model="vm.overlayMenu">
+    </umb-overlay>
 </div>
