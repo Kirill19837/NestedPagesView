@@ -1,0 +1,11 @@
+.nested-pages-view .not-published{
+    opacity: 0.6;
+}
+
+.nested-pages-view .umb-nested-content__icons{
+    opacity: 1;
+}
+
+.nested-pages-view .umb-nested-content__icon--publish{
+    opacity: 0.6
+}

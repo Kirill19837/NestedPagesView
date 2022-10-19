@@ -1,0 +1,13 @@
+﻿{
+  "name": "NestedPagesView",
+  "version": "",
+  "allowPackageTelemetry": true,
+  "javascript": [
+    "~/App_Plugins/NestedPagesView/nestedContentWrapper.js",
+    "~/App_Plugins/NestedPagesView/components/nestedContentEditor.js",
+    "~/App_Plugins/NestedPagesView/components/umbNestedPageEditor.js",
+  ],
+  "css": [
+    "~/App_Plugins/NestedPagesView/styles.css",
+  ]
+}

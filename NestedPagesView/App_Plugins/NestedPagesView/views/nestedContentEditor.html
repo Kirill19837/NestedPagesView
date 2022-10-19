@@ -1,0 +1,42 @@
+<div id="umb-nested-content--{{model.id}}" class="nested-pages-view umb-nested-content"
+    ng-class="{'umb-nested-content--narrow':!vm.wideMode, 'umb-nested-content--wide':vm.wideMode}">
+    <umb-load-indicator class="mt2" ng-if="!vm.inited"></umb-load-indicator>
+    <ng-form name="nestedContentForm" ng-show="vm.inited">
+        <div class="umb-nested-content__items" ng-hide="vm.nodes.length === 0" ng-model="vm.nodes">
+            <div class="umb-nested-content__item" ng-repeat="node in vm.nodes"
+                ng-class="{ 'umb-nested-content__item--active' : vm.containsNode(node), 'umb-nested-content__item--single' : vm.singleMode }">
+                <div class="umb-nested-content__header-bar" ng-click="vm.setCurrentNode(node)" ng-hide="vm.singleMode"
+                    umb-auto-focus="{{vm.containsNode(node) ? 'true' : 'false'}}">
+                    <div class="umb-nested-content__heading" ng-class="{'not-published': !node.published}">
+                        <i ng-if="vm.showIcons" class="icon" ng-class="vm.getIcon($index)"></i>
+                        <span class="umb-nested-content__item-name" ng-class="{'--has-icon': vm.showIcons}"
+                            ng-bind="vm.getName($index)"></span>
+                    </div>
+                    <div class="umb-nested-content__icons">
+                        <button type="button" class="umb-nested-content__icon umb-nested-content__icon--delete umb-nested-content__icon--publish"
+                            ng-if="!node.published" localize="title" title="nestedPagesView_publish"
+                            ng-click="vm.publish(node); $event.stopPropagation();">
+                            <i class="icon icon-power" aria-hidden="true"></i>
+                            <span class="sr-only">
+                                <localize key="nestedPagesView_publish">Publish</localize>
+                            </span>
+                        </button>
+                        <button type="button" ng-if="node.published"
+                            class="umb-nested-content__icon umb-nested-content__icon--delete"
+                            localize="title" title="nestedPagesView_unpublish"
+                            ng-click="vm.unpublish(node, false); $event.stopPropagation();">
+                            <i class="icon icon-power" aria-hidden="true"></i>
+                            <span class="sr-only">
+                                <localize key="nestedPagesView_unpublish">Unpublish</localize>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="umb-nested-content__content" ng-if="vm.containsNode(node)">
+                    <umb-nested-page-editor ng-model="node" tab-alias="ncTabAlias">
+                    </umb-nested-page-editor>
+                </div>
+            </div>
+        </div>
+    </ng-form>
+</div>

@@ -1,0 +1,17 @@
+<div class="umb-pane">
+  <div ng-repeat="property in tab.properties" class="umb-nested-content-property-container">
+
+    <umb-property property="property"
+      ng-class="{'umb-nested-content--not-supported': property.notSupported, 'umb-nested-content--mandatory': property.ncMandatory}"
+      data-element="property-{{property.alias}}" show-inherit="propertyEditorDisabled(property)"
+      inherits-from="defaultVariant.displayName">
+      <div ng-class="{'o-40 cursor-not-allowed': propertyEditorDisabled(property) }">
+        <umb-property-editor model="property" preview="propertyEditorDisabled(property)">
+        </umb-property-editor>
+      </div>
+    </umb-property>
+
+    <div ng-if="property.notSupported" class="umb-nested-content-overlay"></div>
+    <p ng-if="property.notSupported">{{property.notSupportedMessage}}</p>
+  </div>
+</div>
