@@ -5,7 +5,7 @@
     <Product>NestedPagesView</Product>
     <PackageId>NestedPagesView</PackageId>
     <Title>NestedPagesView</Title>
-    <Description>...</Description>
+    <Description>Umbraco property editors for bulk editing of container's children pages. Support multi-language websites and split-view edit.</Description>
     <PackageTags>umbraco plugin package</PackageTags>
     <RepositoryUrl>https://github.com/Kirill19837/NestedPagesView</RepositoryUrl>
     <Company>$(Authors)</Company>
