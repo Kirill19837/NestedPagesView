@@ -1,4 +1,4 @@
-﻿using NestedPageView.Lib.ConfigurationEditor;
+﻿using NestedPagesView.ConfigurationEditor;
 using Umbraco.Cms.Core.IO;
 using Umbraco.Cms.Core.PropertyEditors;
 

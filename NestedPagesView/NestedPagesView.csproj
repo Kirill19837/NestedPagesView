@@ -7,6 +7,10 @@
     <Title>NestedPagesView</Title>
     <Description>...</Description>
     <PackageTags>umbraco plugin package</PackageTags>
+    <RepositoryUrl>https://github.com/Kirill19837/NestedPagesView</RepositoryUrl>
+    <Company>$(Authors)</Company>
+    <Authors>Kirill19837</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
