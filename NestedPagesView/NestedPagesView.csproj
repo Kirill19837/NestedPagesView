@@ -1,21 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+	<AssemblyVersion>1.0.2</AssemblyVersion>
+	<Version>1.0.2</Version>
+	<InformationalVersion>1.0.2</InformationalVersion>
+	<TargetFramework>net6.0</TargetFramework>
     <ContentTargetFolders>.</ContentTargetFolders>
     <Product>NestedPagesView</Product>
     <PackageId>NestedPagesView</PackageId>
     <Title>NestedPagesView</Title>
     <Description>Umbraco property editors for bulk editing of container's children pages. Support multi-language websites and split-view edit.</Description>
-    <PackageTags>umbraco plugin package</PackageTags>
+    <PackageTags>umbraco plugin package umbraco-marketplace</PackageTags>
     <RepositoryUrl>https://github.com/Kirill19837/NestedPagesView</RepositoryUrl>
-    <Company>$(Authors)</Company>
-    <Authors>Kirill19837</Authors>
+	<Company>$(Authors)</Company>
+	<Authors>OSKI solutions</Authors>
+	<PackageProjectUrl>https://oski.site/</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/Kirill19837/NestedPagesView.git</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.2.1" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.2.1" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.4.0" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.4.0" />
   </ItemGroup>
 
   <ItemGroup>
