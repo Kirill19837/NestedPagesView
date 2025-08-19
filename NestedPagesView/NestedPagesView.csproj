@@ -1,14 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>1.0.4</Version>
-    <PackageTags>umbraco-marketplace</PackageTags>
+    <Version>1.0.5</Version>
     <ContentTargetFolders>.</ContentTargetFolders>
     <Product>NestedPagesView</Product>
     <PackageId>NestedPagesView</PackageId>
     <Title>NestedPagesView</Title>
     <Description>Umbraco property editors for bulk editing of container's children pages. Support multi-language websites and split-view edit.</Description>
-    <PackageTags>umbraco plugin package</PackageTags>
+    <PackageTags>umbraco-marketplace umbraco plugin package</PackageTags>
     <RepositoryUrl>https://github.com/Kirill19837/NestedPagesView</RepositoryUrl>
     <Company>$(Authors)</Company>
     <Authors>Kirill19837</Authors>
